@@ -1,2 +1,2 @@
 # dotfiles
-private dotfiles
+my dotfiles
