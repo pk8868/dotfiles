@@ -60,6 +60,8 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
+alias cls="clear"
+
 if [ "$color_prompt" = yes ]; then
     PS1='\e[1;31m[\t]\e[1;97m: \e[1;33m\u\e[1;32m at \e[1;33m\w\n\e[1;36m$(parse_git_branch)\e[1;32m$> \e[97m'
 else
