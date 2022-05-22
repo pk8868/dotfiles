@@ -57,13 +57,14 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
 alias cls="clear"
+alias py3="python3"
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\e[1;97m: \e[1;33m\u\e[1;32m at \e[1;33m\w\e[1;36m$(parse_git_branch)\e[1;32m$> \e[97m'
+    PS1='\e[1;97m: \e[30m[\e[33m\u\e[30m]\e[32m at \e[30m[\e[33m\w\e[30m][\e[31m$(parse_git_branch)\e[30m]\e[32m$> \e[97m'
 else
     PS1='[\t]:\u \n\w> '
 fi
@@ -93,19 +94,9 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
