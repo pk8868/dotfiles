@@ -64,9 +64,10 @@ alias cls="clear"
 alias py3="python3"
 alias htop="htop --t"
 alias du="du -sh"
+alias ..="cd .."
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\e[1;97m: \e[30m[\e[33m\u\e[30m]\e[32m at \e[30m[\e[33m\w\e[30m][\e[31m$(parse_git_branch)\e[30m]\e[32m$> \e[97m'
+    PS1='\e[97m: \e[33m\w \e[31m$(parse_git_branch)\e[32m$> \e[97m'
 else
     PS1='[\t]:\u \n\w> '
 fi
