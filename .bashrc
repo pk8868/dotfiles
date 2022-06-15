@@ -57,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 alias cls="clear"
@@ -67,7 +67,7 @@ alias du="du -sh"
 alias ..="cd .."
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\e[97m: \e[33m\w \e[31m$(parse_git_branch)\e[32m$> \e[97m'
+	PS1='\e[33m\w \e[31m$(parse_git_branch)\e[32m$> \e[97m'
 else
     PS1='[\t]:\u \n\w> '
 fi
