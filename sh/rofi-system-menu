@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+power_off='Power Off\0icon\x1fsystem-shutdown-symbolic'
+restart_wifi='Restart Wi-Fi\0icon\x1fnetwork-wireless'
+system_settings='System Settings\0icon\x1fsettings'
+reboot='Reboot\0icon\x1fsystem-reboot-symbolic'
+log_out='Log Out\0icon\x1fsystem-log-out-symbolic'
+
+chosen=$(echo -en "${restart_wifi};${system_settings};${log_out};${reboot};${power_off}" \
+    | rofi -show-icons -icon-theme "Papirus-Dark" \
+           -dmenu \
+           -sep ';')
+
+case "$chosen" in
+    "Power Off")
+        poweroff
+        ;;
+
+    "System Settings")
+        cinnamon-settings
+        ;;
+
+    "Reboot")
+        reboot
+        ;;
+
+    "Restart Wi-Fi")
+        nmcli radio wifi off
+        nmcli radio wifi on
+        ;;
+
+    "Log Out")
+        cinnamon-session-quit --logout --no-prompt
+        ;;
+
+    *) exit 1 ;;
+esac

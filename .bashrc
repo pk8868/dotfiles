@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -57,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 parse_git_branch() {
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:git(\1)/'
 }
 
 alias cls="clear"
@@ -65,9 +65,12 @@ alias py3="python3"
 alias htop="htop --t"
 alias du="du -sh"
 alias ..="cd .."
-
+alias mpv-hd="mpv script-opts=ytdl_hook-ytdl_path=yt-dlp --ytdl-format=22"
+alias librewolf="flatpak run io.gitlab.librewolf-community"
+alias epiphany="flatpak run org.gnome.Epiphany"
+alias yt-dl-audio="yt-dlp -x --downloader ffmpeg --audio-format m4a"
 if [ "$color_prompt" = yes ]; then
-	PS1='\e[33m\w \e[31m$(parse_git_branch)\e[32m$> \e[97m'
+	PS1='\e[1;32m\w \e[36m$(parse_git_branch)\e[33m$ \e[0;97m'
 else
     PS1='[\t]:\u \n\w> '
 fi
@@ -85,8 +88,8 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto -lhr'
-    alias ls-a='ls --color=auto -lhra'
+    alias ls='ls --color=auto -lh'
+    alias ls-a='ls --color=auto -lha'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
